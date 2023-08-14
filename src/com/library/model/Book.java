@@ -1,4 +1,4 @@
-package com.library.core;
+package com.library.model;
 
 import java.util.Objects;
 
@@ -17,7 +17,6 @@ public class Book {
         this.category = category;
         this.isBorrowed = isBorrowed;
     }
-
 
     public int getBook_id() {
         return book_id;

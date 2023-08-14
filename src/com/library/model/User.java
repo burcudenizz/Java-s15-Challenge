@@ -1,4 +1,4 @@
-package com.library.core;
+package com.library.model;
 
 public class User {
 
