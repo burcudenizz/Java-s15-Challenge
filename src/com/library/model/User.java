@@ -1,5 +1,7 @@
 package com.library.model;
 
+import java.util.List;
+
 public class User {
 
     private int user_id;
@@ -7,9 +9,9 @@ public class User {
     private String surname;
     private String email;
     private String password;
-    private int borrowedBooks;
+    private List<Book> borrowedBooks;
 
-    public User(int user_id, String name, String surname, String email, String password, int borrowedBooks) {
+    public User(int user_id, String name, String surname, String email, String password, List<Book> borrowedBooks) {
         this.user_id = user_id;
         this.name = name;
         this.surname = surname;
@@ -59,11 +61,11 @@ public class User {
         this.password = password;
     }
 
-    public int getBorrowedBooks() {
-        return borrowedBooks;
+    public List<Book> getBorrowedBooks() {
+        return this.borrowedBooks;
     }
 
-    public void setBorrowedBooks(int borrowedBooks) {
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
 

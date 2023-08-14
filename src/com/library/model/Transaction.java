@@ -13,6 +13,8 @@ public class Transaction {
         this.returned = returned;
     }
 
+
+
     public int getId() {
         return id;
     }

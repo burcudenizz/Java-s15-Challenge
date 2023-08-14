@@ -1,11 +1,11 @@
 package com.library.data;
 
-import com.library.model.Book;
-import com.library.model.Transaction;
-import com.library.model.User;
+import com.library.model.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class LibraryDatabase {
@@ -20,7 +20,7 @@ public class LibraryDatabase {
         transactions = new HashMap<>();
     }
 
-    /*public void addBook(Book book) {
+    public void addBook(Book book) {
         books.put(book.getBook_id(), book);
     }
 
@@ -29,19 +29,17 @@ public class LibraryDatabase {
     }
 
     public List<Book> getBooksByTitle(String title) {
-        return books.values().stream()
-                .filter(book -> book.getTitle().equalsIgnoreCase(title))
-                .collect(Collectors.toList());
+        return books.values().stream() // tüm kitap nesnelerinin akışını oluşturur.
+                .filter(book -> book.getTitle().equals(title)).collect(Collectors.toList()); // filtrelenen kitap nesnelerini bir liste olarak toplar ve döndürür.
     }
 
+
     public List<Book> getBooksByAuthor(String authorName) {
-        return books.values().stream()
-                .filter(book -> book.getAuthor().getName().equalsIgnoreCase(authorName))
-                .collect(Collectors.toList());
+        return books.values().stream().filter(book -> book.getAuthor().equals(authorName)).collect(Collectors.toList());
     }
 
     public void updateBook(Book book) {
-        books.put(book.getId(), book);
+        books.put(book.getBook_id(), book);
     }
 
     public void deleteBook(int id) {
@@ -49,66 +47,35 @@ public class LibraryDatabase {
     }
 
     public List<Book> getBooksByCategory(Category category) {
-        return books.values().stream()
-                .filter(book -> book.getCategory().equals(category))
-                .collect(Collectors.toList());
+        return books.values().stream().filter(book -> book.getCategory().equals(category)).collect(Collectors.toList());
     }
 
     public List<Book> getBooksByAuthor(Author author) {
-        return books.values().stream()
-                .filter(book -> book.getAuthor().equals(author))
-                .collect(Collectors.toList());
+        return books.values().stream().filter(book -> book.getAuthor().equals(author)).collect(Collectors.toList());
     }
 
-    public void borrowBook(User user, Book book) {
-        Transaction transaction = new Transaction(user, book);
+    public void borrowBook(User user, Book book) { // ?? tekrar bak
+
+        int newTransactionId = generateNewTransactionId();
+        Transaction transaction = new Transaction(newTransactionId, user, book, false);
         transactions.put(transaction.getId(), transaction);
         user.getBorrowedBooks().add(book);
-        book.setBorrowedBy(user);
+        books.put(transaction.getId(), book);
+
     }
 
-    public void returnBook(User user, Book book) {
-        Transaction transaction = transactions.get(book.getId());
+    public void returnBook(User user, Book book) { // ?? tekrar bak
+        int newTransactionId = generateNewTransactionId();
+        Transaction transaction = transactions.get(book.getBook_id());
         transaction.setReturned(true);
         user.getBorrowedBooks().remove(book);
-        book.setBorrowedBy(null);
     }
 
-    public Map<Integer, Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(Map<Integer, Book> books) {
-        this.books = books;
-    }
-
-    public Map<Integer, User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Map<Integer, User> users) {
-        this.users = users;
-    }
-
-    public Map<Integer, Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Map<Integer, Transaction> transactions) {
-        this.transactions = transactions;
-    }
-*/
     @Override
     public String toString() {
-        return "LibraryDatabase{" +
-                "books=" + books +
-                ", users=" + users +
-                ", transactions=" + transactions +
-                '}';
+        return "LibraryDatabase{" + "books=" + books + ", users=" + users + ", transactions=" + transactions + '}';
     }
-
-
-
 
 
 }
