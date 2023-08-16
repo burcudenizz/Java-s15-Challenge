@@ -26,4 +26,11 @@ public class UserManager implements LibraryUserService {
     public void deleteUser(int userId) {
         database.deleteUser(userId);
     }
+
+    public boolean isEmailRegisteredBefore(String email){
+        User user= database.getUserByEmail(email);
+        return user != null;
+    }
+
+
 }
