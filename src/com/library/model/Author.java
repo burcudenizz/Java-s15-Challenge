@@ -15,6 +15,11 @@ public class Author {
         this.books = books;
     }
 
+    public Author(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public String getName() {
         return name;
     }
