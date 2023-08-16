@@ -14,7 +14,6 @@ public class Transaction {
     }
 
 
-
     public int getId() {
         return id;
     }

@@ -2,13 +2,22 @@ package com.library.data;
 
 import com.library.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 
 public class LibraryDatabase {
+
+    private AtomicInteger transactionIdCounter = new AtomicInteger(1);
+
+    public int generateNewTransactionId() {
+        return transactionIdCounter.getAndIncrement();
+    }
+
     private Map<Integer, Book> books;
     private Map<Integer, User> users;
     private Map<Integer, Transaction> transactions;
@@ -32,7 +41,6 @@ public class LibraryDatabase {
         return books.values().stream() // tüm kitap nesnelerinin akışını oluşturur.
                 .filter(book -> book.getTitle().equals(title)).collect(Collectors.toList()); // filtrelenen kitap nesnelerini bir liste olarak toplar ve döndürür.
     }
-
 
     public List<Book> getBooksByAuthor(String authorName) {
         return books.values().stream().filter(book -> book.getAuthor().equals(authorName)).collect(Collectors.toList());
@@ -71,6 +79,35 @@ public class LibraryDatabase {
         user.getBorrowedBooks().remove(book);
     }
 
+
+    //USER METHODS
+
+    public void addUser(User user) {
+        users.put(user.getUser_id(), user);
+    }
+
+    public User getUserById(int id) {
+        return users.get(id);
+    }
+
+    public User getUserByEmail(String email) {
+        return users.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void updateUser(User user) {
+        users.put(user.getUser_id(), user);
+    }
+
+    public void deleteUser(int id) {
+        users.remove(id);
+    }
+
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users.values());
+    }
 
     @Override
     public String toString() {
