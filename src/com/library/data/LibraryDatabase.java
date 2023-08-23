@@ -29,6 +29,10 @@ public class LibraryDatabase {
         transactions = new HashMap<>();
     }
 
+
+    public List<Book> getAllBooksDatabase(){
+        return books.values().stream().toList();
+    }
     public void addBook(Book book) {
         books.put(book.getBook_id(), book);
     }
@@ -62,23 +66,25 @@ public class LibraryDatabase {
         return books.values().stream().filter(book -> book.getAuthor().equals(author)).collect(Collectors.toList());
     }
 
-    public void borrowBook(User user, Book book) { // ?? tekrar bak
+    public void borrowBook(User user, Book book) {
 
         int newTransactionId = generateNewTransactionId();
         Transaction transaction = new Transaction(newTransactionId, user, book, false);
         transactions.put(transaction.getId(), transaction);
         user.getBorrowedBooks().add(book);
-        books.put(transaction.getId(), book);
+        books.remove(book.getBook_id());
 
     }
 
-    public void returnBook(User user, Book book) { // ?? tekrar bak
-        int newTransactionId = generateNewTransactionId();
+
+    public void returnBookDatabase(User user, Book book) {
         Transaction transaction = transactions.get(book.getBook_id());
-        transaction.setReturned(true);
-        user.getBorrowedBooks().remove(book);
+        if (transaction != null && !transaction.isReturned()) {
+            transaction.setReturned(true);
+            book.setBorrowed(false);
+            user.getBorrowedBooks().remove(book);
+        }
     }
-
 
     //USER METHODS
 

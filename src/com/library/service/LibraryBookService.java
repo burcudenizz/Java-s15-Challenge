@@ -30,4 +30,5 @@ public interface LibraryBookService {
 
     void generateInvoice(User user, Book book);
 
+    List<Book> getAllBooks();
 }

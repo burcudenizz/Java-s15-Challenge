@@ -53,24 +53,34 @@ public class BookManager implements LibraryBookService {
 
     @Override
     public void borrowBook(User user, Book book) {
-        if (user.getBorrowedBooks().size() < 5) {
-            if (book.isBorrowed()) {
+        if (!book.isBorrowed()) {
+            if (user.getBorrowedBooks().size() < 5) {
+                book.setBorrowed(true);
+                book.setBorrower(user);
                 database.borrowBook(user, book);
+                double totalPrice = book.getPrice();
+                System.out.println("Total price for borrowed book: " + totalPrice);
+
             } else {
-                System.out.println("Book is already borrowed by another user.");
+                System.out.println("User has reached the borrowing limit.");
             }
         } else {
-            System.out.println("User has reached the borrowing limit.");
+            System.out.println("Book is already borrowed by another user.");
         }
     }
 
     @Override
     public void returnBook(User user, Book book) {
-        database.returnBook(user, book);
+        database.returnBookDatabase(user, book);
     }
 
     @Override
     public void generateInvoice(User user, Book book) {
 //bak???
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return database.getAllBooksDatabase();
     }
 }

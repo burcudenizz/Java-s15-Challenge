@@ -9,13 +9,18 @@ public class Book {
     Author author;
     Category category;
     boolean isBorrowed;
+    private double price;
 
-    public Book(int book_id, String title, Author author, Category category, boolean isBorrowed) {
+    private User borrower;
+
+    public Book(int book_id, String title, Author author, Category category, boolean isBorrowed, double price,User borrower) {
         this.book_id = book_id;
         this.title = title;
         this.author = author;
         this.category = category;
         this.isBorrowed = isBorrowed;
+        this.price = price;
+        this.borrower=borrower;
     }
 
     public int getBook_id() {
@@ -58,6 +63,22 @@ public class Book {
         isBorrowed = borrowed;
     }
 
+    public User getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(User borrower) {
+        this.borrower = borrower;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,4 +102,6 @@ public class Book {
                 ", isBorrowed=" + isBorrowed +
                 '}';
     }
+
+
 }
