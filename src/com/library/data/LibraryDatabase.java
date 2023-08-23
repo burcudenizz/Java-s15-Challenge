@@ -30,9 +30,10 @@ public class LibraryDatabase {
     }
 
 
-    public List<Book> getAllBooksDatabase(){
+    public List<Book> getAllBooksDatabase() {
         return books.values().stream().toList();
     }
+
     public void addBook(Book book) {
         books.put(book.getBook_id(), book);
     }
@@ -72,7 +73,8 @@ public class LibraryDatabase {
         Transaction transaction = new Transaction(newTransactionId, user, book, false);
         transactions.put(transaction.getId(), transaction);
         user.getBorrowedBooks().add(book);
-        books.remove(book.getBook_id());
+        book.setBorrowed(true);
+        //books.remove(book.getBook_id());
 
     }
 
@@ -82,6 +84,7 @@ public class LibraryDatabase {
         if (transaction != null && !transaction.isReturned()) {
             transaction.setReturned(true);
             book.setBorrowed(false);
+            book.setBorrower(null);
             user.getBorrowedBooks().remove(book);
         }
     }

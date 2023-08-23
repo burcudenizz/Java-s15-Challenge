@@ -28,7 +28,5 @@ public interface LibraryBookService {
 
     void returnBook(User user, Book book);
 
-    void generateInvoice(User user, Book book);
-
     List<Book> getAllBooks();
 }

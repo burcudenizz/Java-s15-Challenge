@@ -71,13 +71,15 @@ public class BookManager implements LibraryBookService {
 
     @Override
     public void returnBook(User user, Book book) {
-        database.returnBookDatabase(user, book);
+
+        if(book.isBorrowed()){
+            book.setBorrowed(false);
+            database.returnBookDatabase(user, book);
+        }
+
+
     }
 
-    @Override
-    public void generateInvoice(User user, Book book) {
-//bak???
-    }
 
     @Override
     public List<Book> getAllBooks() {

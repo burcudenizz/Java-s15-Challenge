@@ -10,7 +10,6 @@ public class Book {
     Category category;
     boolean isBorrowed;
     private double price;
-
     private User borrower;
 
     public Book(int book_id, String title, Author author, Category category, boolean isBorrowed, double price,User borrower) {
