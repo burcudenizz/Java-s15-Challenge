@@ -124,4 +124,10 @@ public class LibraryDatabase {
     }
 
 
+    public List<Author> getAllAuthorsDatabase() {
+        return books.values().stream()
+                .map(Book::getAuthor)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }

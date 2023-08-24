@@ -42,6 +42,11 @@ public class BookManager implements LibraryBookService {
     }
 
     @Override
+    public void deleteBookByTitle(Book book) {
+        database.deleteBook(book.getBook_id());
+    }
+
+    @Override
     public List<Book> getBooksByCategory(Category category) {
         return database.getBooksByCategory(category);
     }
@@ -51,6 +56,10 @@ public class BookManager implements LibraryBookService {
         return database.getBooksByAuthor(author);
     }
 
+
+    public List<Author> getAllAuthors() {
+        return database.getAllAuthorsDatabase();
+    }
     @Override
     public void borrowBook(User user, Book book) {
         if (!book.isBorrowed()) {

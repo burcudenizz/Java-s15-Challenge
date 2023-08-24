@@ -1,5 +1,7 @@
 package com.library.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Book {
@@ -11,6 +13,7 @@ public class Book {
     boolean isBorrowed;
     private double price;
     private User borrower;
+    private List<Review> reviews;
 
     public Book(int book_id, String title, Author author, Category category, boolean isBorrowed, double price,User borrower) {
         this.book_id = book_id;
@@ -20,6 +23,29 @@ public class Book {
         this.isBorrowed = isBorrowed;
         this.price = price;
         this.borrower=borrower;
+    }
+    public Book(int book_id, String title, Author author, Category category, boolean isBorrowed, double price,User borrower,List<Review> reviews) {
+        this.book_id = book_id;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.isBorrowed = isBorrowed;
+        this.price = price;
+        this.borrower=borrower;
+        this.reviews = new ArrayList<>();
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+
+    public void addReview(Review review) {
+        reviews.add(review);
     }
 
     public int getBook_id() {

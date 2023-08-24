@@ -20,6 +20,7 @@ public interface LibraryBookService {
 
     void deleteBook(int id);
 
+    void deleteBookByTitle(Book book);
     List<Book> getBooksByCategory(Category category);
 
     List<Book> getBooksByAuthor(Author author);
