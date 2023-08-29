@@ -13,7 +13,13 @@ public class Book {
     boolean isBorrowed;
     private double price;
     private User borrower;
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
+
+
+    public Book(String title) {
+        this.title = title;
+        this.reviews = new ArrayList<>();
+    }
 
     public Book(int book_id, String title, Author author, Category category, boolean isBorrowed, double price,User borrower) {
         this.book_id = book_id;
@@ -42,7 +48,6 @@ public class Book {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
-
 
     public void addReview(Review review) {
         reviews.add(review);

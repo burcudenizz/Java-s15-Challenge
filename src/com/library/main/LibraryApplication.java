@@ -215,28 +215,31 @@ public class LibraryApplication {
                 System.out.println("Enter the title of the book to update:");
                 String titleToUpdate = scanner.nextLine();
 
-                List<Book> booksToUpdate = bookManager.getBooksByTitle(titleToUpdate);
+                List<Book> booksToUpdate = bookManager.getBooksByTitle(titleToUpdate); // we received the all books as list and type of book!!
                 if (booksToUpdate.isEmpty()) {
                     System.out.println("Book not found.");
                 } else {
-                    Book bookToUpdate = booksToUpdate.get(0); // Choose the first book with the given title
+                    Book oneBookToUpdate = booksToUpdate.get(0);
                     System.out.println("Enter new title:");
                     String newTitle = scanner.nextLine();
-                    bookToUpdate.setTitle(newTitle);
+                    oneBookToUpdate.setTitle(newTitle);
 
                     System.out.println("Enter new author name:");
                     String newAuthorName = scanner.nextLine();
+
                     System.out.println("Enter new author surname:");
                     String newAuthorSurname = scanner.nextLine();
-                    bookToUpdate.getAuthor().setName(newAuthorName);
-                    bookToUpdate.getAuthor().setSurname(newAuthorSurname);
+
+                    oneBookToUpdate.getAuthor().setName(newAuthorName);
+                    oneBookToUpdate.getAuthor().setSurname(newAuthorSurname);
 
                     System.out.println("Enter new price:");
                     String newPriceInput = scanner.nextLine().trim();
+
                     if (!newPriceInput.isEmpty()) {
                         try {
                             double newPrice = Double.parseDouble(newPriceInput);
-                            bookToUpdate.setPrice(newPrice);
+                            oneBookToUpdate.setPrice(newPrice);
                             System.out.println("Book information updated successfully!");
                         } catch (NumberFormatException e) {
                             System.out.println("Invalid price input. Book information not updated.");
@@ -251,7 +254,7 @@ public class LibraryApplication {
                 System.out.println("Enter the title of the book to delete:");
                 String titleToDelete = scanner.nextLine();
 
-                List<Book> booksToDelete = bookManager.getBooksByTitle(titleToDelete);
+                List<Book> booksToDelete = bookManager.getBooksByTitle(titleToDelete); // we received the all books as list and type of book!!
 
                 if (!booksToDelete.isEmpty()) {
                     for (Book bookToDelete : booksToDelete) {
@@ -268,9 +271,9 @@ public class LibraryApplication {
                 System.out.println("Enter the title of the book to show reviews:");
                 String bookTitle = scanner.nextLine();
 
-                List<Book> booksToShowReviews = bookManager.getBooksByTitle(bookTitle);
+                List<Book> booksToShowReviews = bookManager.getBooksByTitle(bookTitle); // we received the all books as list and type of book!!
 
-                if (!(booksToShowReviews == null)) {
+                if (!booksToShowReviews.isEmpty()) {
                     for (Book bookToShowReviews : booksToShowReviews) {
                         List<Review> reviews = bookToShowReviews.getReviews();
                         if (reviews.isEmpty()) {
@@ -320,7 +323,7 @@ public class LibraryApplication {
                 }
 
                 int authorChoice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
+                scanner.nextLine();
 
                 if (authorChoice >= 1 && authorChoice <= authors.size()) {
                     Author selectedAuthor = authors.get(authorChoice - 1);

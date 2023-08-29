@@ -74,7 +74,7 @@ public class LibraryDatabase {
         transactions.put(transaction.getId(), transaction);
         user.getBorrowedBooks().add(book);
         book.setBorrowed(true);
-        //books.remove(book.getBook_id());
+        books.remove(book.getBook_id());
 
     }
 
